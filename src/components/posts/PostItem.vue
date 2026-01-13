@@ -1,0 +1,32 @@
+<template>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title" style="cursor: pointer;">{{ title }}</h5>
+      <p class="card-text">
+        {{ contents }}
+      </p>
+
+      <p class="text-muted">{{ createdAt }}</p>
+    </div>
+  </div>
+</template>
+
+<script setup>
+defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  contents: {
+    type: String,
+    required: true
+  },
+  createdAt: {
+    type: [String, Date, Number],
+  }
+})
+</script>
+
+<style lang="scss" scoped>
+
+</style>
