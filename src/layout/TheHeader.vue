@@ -1,7 +1,3 @@
-<script setup>
-
-</script>
-
 <template>
   <header>
     <nav class="navbar navbar-expand-sm bg-body-tertiary" data-bs-theme="dark">
@@ -13,7 +9,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <RouterLink class="nav-link" active-class="active" to="/">Home</RouterLink>
+              <!-- <a class="nav-link active" aria-current="page" href="/">Home</a> -->
+            </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" active-class="active" to="/about">About</RouterLink>
+              <!-- <a class="nav-link active" aria-current="page" href="/about">About</a> -->
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Link</a>
@@ -28,6 +29,10 @@
     </nav>
   </header>
 </template>
+
+<script setup>
+
+</script>
 
 <style>
 
