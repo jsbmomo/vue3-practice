@@ -1,0 +1,33 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "제목",
+      "contents": "내용",
+      "createdAt": "2026-01-13"
+    },
+    {
+      "id": 2,
+      "title": "제목",
+      "contents": "안녕하세요.",
+      "createdAt": "2026-01-14"
+    },
+    {
+      "title": "제목",
+      "contents": "반가워요~~~!",
+      "id": 3
+    },
+    {
+      "id": 5,
+      "title": "제목",
+      "contents": "다시만나요.",
+      "createdAt": "2026-01-17"
+    },
+    {
+      "title": "생성",
+      "contents": "추가해보았습니다.",
+      "createdAt": 1768353379543,
+      "id": 6
+    }
+  ]
+}

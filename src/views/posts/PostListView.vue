@@ -26,12 +26,30 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 const posts = ref([])
 
-const fetchPosts = () => {
-  posts.value = getPosts()
+const fetchPosts = async () => {
+  // getPosts()
+  //   .then(res => {
+  //     console.log(res.data);
+  //     posts.value = res.data
+  //   })
+  //   .catch(error => {
+  //     console.log('error : ', error);
+  //   })
+
+  // ({ data: posts.value } = await getPosts()) // 이렇게도 가능...
+
+  try {
+    const { data } = await getPosts()
+
+    posts.value = data 
+  } catch (error) {
+    console.error(error);
+    
+  }
 }
 
 // 다양한 화면이동 방법
-const goPage = (index) => {
+const goPage = (id) => {
   // router.push(`/posts/${index}`)
   // router.push({ path: `/posts/${index}` }) // 경로가 있는 객체
   // router.push({ name: 'PostDetail', params: { id: index } }) // 이름을 가지는 라우트
@@ -39,9 +57,7 @@ const goPage = (index) => {
   // router.push({ path: '/about', hash: '#team' }) // 해시와 함께 사용, /about#team
   router.push({
     name: 'PostDetail',
-    params: {
-      id: index
-    },
+    params: { id },
     query: {
       searchText: 'hello'
     },
