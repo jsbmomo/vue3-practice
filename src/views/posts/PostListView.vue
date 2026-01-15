@@ -73,7 +73,7 @@ const params = ref({ // json-server 공식문서 참고
   _order: 'desc',
   _page: 1,
   _limit: 3,
-  title_like: '0'
+  title_like: ''
 })
 // pagination
 const totalCount = ref(0)

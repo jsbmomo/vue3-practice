@@ -1,7 +1,7 @@
-import axios from "axios"
+import { posts } from '.' // index.js를 가져옴.
 
 // axios로 데이터를 호출했다고 가정
-const posts = [
+const postData = [
   { id: 1, title: '제목', contents: '내용', createdAt: '2026-01-13'},
   { id: 2, title: '제목', contents: '안녕하세요.', createdAt: '2026-01-14'},
   { id: 3, title: '제목', contents: '반가워요.', createdAt: '2026-01-15'},
@@ -10,21 +10,21 @@ const posts = [
 ]
 
 export function getPosts(params) {
-  return axios.get('http://localhost:5000/posts', { params })
+  return posts.get('/', { params })
 }
 
 export function getPostById(id) {
-  return axios.get(`http://localhost:5000/posts/${id}`)
+  return posts.get(`/${id}`)
 }
 
 export function createPost(data) {
-  return axios.post(`http://localhost:5000/posts`, data)
+  return posts.post(`/`, data)
 }
 
 export function updatePost(id, data) {
-  return axios.put(`http://localhost:5000/posts/${id}`, data)
+  return posts.put(`/${id}`, data)
 }
 
 export function deletePost(id) {
-  return axios.delete(`http://localhost:5000/posts/${id}`)
+  return posts.delete(`/${id}`)
 }

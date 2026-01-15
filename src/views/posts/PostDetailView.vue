@@ -43,8 +43,7 @@ const id = route.params.id
 
 const props = defineProps({
   id: {
-    type: Number,
-    required: true
+    type: String
   }
 })
 

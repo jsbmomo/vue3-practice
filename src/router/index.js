@@ -35,6 +35,8 @@ const routes = [
     path: '/posts/:id', // 동적 라우팅
     name: 'PostDetail',
     component: PostDetailView,
+    props: true, // get parameter의 값을 props로 받을 경우.
+    // props: route => ({ id: parseInt(route.params.id )})
   },
   {
     path: '/posts/:id/edit',
