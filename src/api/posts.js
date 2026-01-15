@@ -9,8 +9,8 @@ const posts = [
   { id: 5, title: '제목', contents: '다시만나요', createdAt: '2026-01-17'},
 ]
 
-export function getPosts() {
-  return axios.get('http://localhost:5000/posts')
+export function getPosts(params) {
+  return axios.get('http://localhost:5000/posts', { params })
 }
 
 export function getPostById(id) {

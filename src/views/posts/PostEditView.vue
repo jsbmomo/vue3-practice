@@ -41,6 +41,7 @@ const fetchPost = async () => {
 const setPost = (data) => {
   post.value.title = data.title
   post.value.contents = data.contents
+  post.value.createdAt = data.createdAt // 현재 수정 시 모든 데이터를 다 넘기고 있기에 생략 시, null 값.
 }
 
 fetchPost()
