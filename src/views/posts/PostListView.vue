@@ -33,35 +33,20 @@
       </div>
     </div>
 
-    <nav class="mt-5" aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" :class="{ disabled: params._page <= 1 }">
-          <a class="page-link" href="#" @click.prevent="--params._page" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-
-        <li v-for="page in pageCount" :key="page" class="page-item" :class="{ active: params._page === page}">
-          <a class="page-link" href="#" @click.prevent="params._page = page">{{ page }}</a>
-        </li>
-        <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-        <li class="page-item" :class="{ disabled: params._page >= pageCount }">
-          <a class="page-link" href="#" @click.prevent="++params._page" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
     <hr class="my-5"/>
+
+    <AppPagination 
+      :page-count="totalCount"
+      :current-page="pageCount"
+      @page="emitPage"
+    />
 
   </div>
 </template>
 
 <script setup>
 import PostItem from '../../components/posts/PostItem.vue';
+import AppPagination from '../../components/AppPagination.vue';
 import { getPosts } from '../../api/posts';
 import { ref, reactive, computed, watchEffect } from 'vue'
 import { useRouter } from 'vue-router';
@@ -79,6 +64,12 @@ const params = ref({ // json-server 공식문서 참고
 const totalCount = ref(0)
 const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit))
 
+const emitPage = (page) => {
+  // 
+  console.log('>> ', page)
+  params._page = page
+}
+
 const fetchPosts = async () => {
   // getPosts()
   //   .then(res => {
@@ -90,6 +81,8 @@ const fetchPosts = async () => {
   //   })
 
   // ({ data: posts.value } = await getPosts()) // 이렇게도 가능...
+
+  console.log(params.value)
 
   try {
     const { data, headers } = await getPosts(params.value)

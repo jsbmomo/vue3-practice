@@ -3,7 +3,9 @@
     <h2>{{ post.title }}</h2>
     <p>{{ post.contents }}</p>
     <p class="text-muted">{{ post.createdAt }}</p>
+
     <hr class="my-4"/>
+
     <div class="row g-2">
       <div class="col-auto">
         <button class="btn btn-outline-dark">이전글</button>

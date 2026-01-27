@@ -3,43 +3,23 @@
     <h2>게시글 등록</h2>
     <hr class="my-4"/>
 
-    <form @submit.prevent>
-      <div class="mb-3">
-        <label for="title" class="form-label">제목</label>
-        <input 
-          v-model="form.title" 
-          id="title"
-          type="text" 
-          class="form-control" 
-          placeholder="제목"
-        />
-      </div>
-      <div class="mb-3">
-        <label for="contents" class="form-label">내용</label>
-        <textarea 
-          v-model="form.contents" 
-          id="contents"
-          class="form-control" 
-          rows="3"
-        ></textarea>
-      </div>
-
-      <div class="pt-4">
-        <button 
-          type="button" 
-          class="btn btn-outline-dark me-2" 
+    <PostForm 
+      v-model:title="form.title"
+      v-model:content="form.contents"
+      @submit.prevent="save"
+    >
+      <template #actions>
+        <button
+          type="button"
+          class="btn btn-outline-dark me-2"
           @click="goListPage"
         >
           목록
         </button>
-        <button 
-          class="btn btn-primary"
-          @click="save"
-        >
-          저장
-        </button>
-      </div>
-    </form>
+        <button class="btn btn-primary">저장</button>
+      </template>
+    </PostForm>
+
   </div>
 </template>
 
@@ -47,6 +27,7 @@
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { createPost } from '../../api/posts';
+import PostForm from '../../components/posts/PostForm.vue';
 
 const router = useRouter()
 
@@ -59,7 +40,7 @@ const save = () => {
   try {
     createPost({
       ...form.value,
-      createdAt: Date.now().toString('yyyy-MM-dd')
+      createdAt: getCurrentDate()
     })
     router.push({ name: 'PostList' })
   } catch (error) {
@@ -68,6 +49,16 @@ const save = () => {
 }
 
 const goListPage = () => router.push({ name: 'PostList' })
+
+const getCurrentDate = () => {
+  const today = new Date()
+
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2,'0')
+  const date = String(today.getDate()).padStart(2,'0')
+
+  return `${year}-${month}-${date}`
+}
 </script>
 
 <style lang="scss" scoped>
