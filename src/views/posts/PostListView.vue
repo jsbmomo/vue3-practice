@@ -3,22 +3,11 @@
     <h2>게시글 목록</h2>
 
     <hr class="my-4"/>
-
-    <form @submit.prevent>
-      <div class="row g-3">
-        <div class="col">
-          <input v-model="params.title_like" type="text" class="form-control"/>
-        </div>
-        <div class="col-3">
-          <select v-model="params._limit" class="form-select">
-            <option value="3">3개씩 보기</option>
-            <option value="6">6개씩 보기</option>
-            <option value="9">9개씩 보기</option>
-          </select>
-        </div>
-      </div>
-    </form>
-
+      <PostFilter
+        :title="params.title_like"
+        @update:title="(title) => params.title_like = title"
+        @update:limit="(limit) => params._limit = limit"
+      />
     <hr class="my-4"/>
 
     <div class="row g-3">
@@ -35,21 +24,32 @@
 
     <hr class="my-5"/>
 
+    <!-- parasm Watch 걸려있는 상태 -->
     <AppPagination 
-      :page-count="totalCount"
-      :current-page="pageCount"
-      @page="emitPage"
+      :page-count="pageCount"
+      :current-page="params._page"
+      @page="page => (params._page = page)"
     />
+
+    <template v-if="posts && posts.length > 0">
+      <hr class="my-5"/>
+      <AppCard>
+        <PostDetailView :id="posts[0].id"/>
+      </AppCard>
+    </template>
 
   </div>
 </template>
 
 <script setup>
 import PostItem from '../../components/posts/PostItem.vue';
+import AppCard from '../../components/AppCard.vue';
 import AppPagination from '../../components/AppPagination.vue';
+import PostDetailView from './PostDetailView.vue'
 import { getPosts } from '../../api/posts';
 import { ref, reactive, computed, watchEffect } from 'vue'
 import { useRouter } from 'vue-router';
+import PostFilter from '../../components/posts/PostFilter.vue';
 
 const router = useRouter()
 const posts = ref([])
@@ -64,12 +64,6 @@ const params = ref({ // json-server 공식문서 참고
 const totalCount = ref(0)
 const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit))
 
-const emitPage = (page) => {
-  // 
-  console.log('>> ', page)
-  params._page = page
-}
-
 const fetchPosts = async () => {
   // getPosts()
   //   .then(res => {
@@ -81,8 +75,6 @@ const fetchPosts = async () => {
   //   })
 
   // ({ data: posts.value } = await getPosts()) // 이렇게도 가능...
-
-  console.log(params.value)
 
   try {
     const { data, headers } = await getPosts(params.value)

@@ -9,4 +9,4 @@ function create(baseURL, options) {
 
 const url = import.meta.env.VITE_APP_API_URL
 
-export const posts = create(`${import.meta.env.VITE_APP_API_URL}/posts`)
+export const posts = create(`${url}/posts`)
