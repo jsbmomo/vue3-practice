@@ -22,7 +22,9 @@ export function createPost(data) {
 }
 
 export function updatePost(id, data) {
-  return posts.put(`/${id}`, data)
+  // return posts.put(`/${id}`, data)
+  // http put은 전체 데이터 수정 시. patch는 일부만 수정.
+  return posts.patch(`/${id}`, data) 
 }
 
 export function deletePost(id) {
