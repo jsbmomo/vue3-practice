@@ -1,38 +1,53 @@
 <template>
-  <!-- Vue JS에서 기본 제공하는 객체 -->
-  <Transition name="slide">
-    <div 
-      v-if="show"
-      class="alert app-alert" 
-      :class="styleClass"
-      role="alert"
-    >
+  <!-- <Transition> = Vue JS에서 기본 제공하는 객체 -->
+  <!-- <Transition name="slide">
+    <div v-if="show" class="alert app-alert" :class="typeStyle" role="alert">
       {{ message }}
     </div>
-  </Transition>
+  </Transition> -->
+  <div class="app-alert">
+    <TransitionGroup name="slide">
+      <div 
+        v-for="({ message, type }, index) in items" 
+        :key="index"
+        class="alert" 
+        :class="typeStyle(type)" 
+        role="alert"
+      >
+        {{ message }}
+      </div>
+    </TransitionGroup>
+  </div>
+
 </template>
 
 <script setup>
 import { computed, reactive, ref, watchEffect } from 'vue';
 
 const props = defineProps({
-  show: {
-    type: Boolean,
-    default: false
-  },
-  message: {
-    type: String,
-    required: true
-  },
-  type: {
-    type: String,
-    required: true,
-    default: 'error',
-    validator: (value) => ['success', 'error'].includes(value)
-  }
+  items: Array,
 })
 
-const styleClass = computed(() => props.type === 'error' ? 'alert-danger' : 'alert-success')
+const typeStyle = (type) => {
+  return type === 'error' ? 'alert-danger' : 'alert-success'
+}
+// const props = defineProps({
+//   show: {
+//     type: Boolean,
+//     default: false
+//   },
+//   message: {
+//     type: String,
+//     required: true
+//   },
+//   type: {
+//     type: String,
+//     required: true,
+//     default: 'error',
+//     validator: (value) => ['success', 'error'].includes(value)
+//   }
+// })
+// const typeStyle = computed(() => props.type === 'error' ? 'alert-danger' : 'alert-success')
 </script>
 
 <style scoped>

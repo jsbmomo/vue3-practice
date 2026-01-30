@@ -20,11 +20,13 @@
       </template>
     </PostForm>
 
-    <AppAlert
+    <!-- <AppAlert
       :show="showAlert"
       :message="alertMessage"
       :type="alertType"
-    />
+    /> -->
+    <AppAlert :items="alerts" />
+
   </div>
 </template>
 
@@ -65,21 +67,28 @@ const editPost = async () => {
   } catch(error) {
     console.error(error);
 
-    vAlert('네트워크 오류')
+    vAlert(error.message)
   }
 }
 
-// alert
-const showAlert = ref(false)
-const alertMessage = ref('')
-const alertType = ref('error')
+// <alert>
+// const showAlert = ref(false)
+// const alertMessage = ref('')
+// const alertType = ref('error')
 
+// const vAlert = (message, type = 'error') => {
+//   showAlert.value = true
+//   alertMessage.value = message
+//   alertType.value = type
+
+//   setTimeout(() => showAlert.value = false, 3000)
+// }
+
+const alerts = ref([])
 const vAlert = (message, type = 'error') => {
-  showAlert.value = true
-  alertMessage.value = message
-  alertType.value = type
-
-  setTimeout(() => showAlert.value = false, 3000)
+  alerts.value.push({ message, type })
+  
+  setTimeout(() => alerts.value.shift(), 2000)
 }
 </script>
 
