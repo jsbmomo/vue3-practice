@@ -38,6 +38,7 @@
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { deletePost, getPostById } from '../../api/posts';
+import AppAlert from '../../components/AppAlert.vue';
 
 const route = useRoute()
 const router = useRouter()
