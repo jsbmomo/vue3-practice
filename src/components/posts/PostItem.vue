@@ -6,7 +6,17 @@
       {{ contents }}
     </p>
 
-    <p class="text-muted">{{ createdAt }}</p>
+    <p class="text-muted">
+      {{ createdAt }}
+    </p>
+
+    <template #footer>
+      <div class="d-flex" @click.stop>
+        <button class="btn p-0 ms-auto" @click="$emit('modal')">
+          <i class="bi bi-emoji-sunglasses"></i>
+        </button>
+      </div>
+    </template>
   </AppCard>
 </template>
 

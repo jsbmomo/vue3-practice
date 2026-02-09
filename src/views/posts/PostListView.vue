@@ -18,6 +18,7 @@
           :contents="post.contents" 
           :created-at="post.createdAt"
           @click="goPage(post.id)"
+          @modal="openModal(post)"
         />
       </div>
     </div>
@@ -30,6 +31,15 @@
       :current-page="params._page"
       @page="page => (params._page = page)"
     />
+
+    <Teleport to="#modal">
+      <PostModal
+        v-model="show"    
+        :title="modalPost.title"
+        :contents="modalPost.contents"
+        :createdAt="modalPost.createdAt"
+      />
+    </Teleport>
 
     <template v-if="posts && posts.length > 0">
       <hr class="my-5"/>
@@ -50,6 +60,7 @@ import { getPosts } from '../../api/posts';
 import { ref, reactive, computed, watchEffect } from 'vue'
 import { useRouter } from 'vue-router';
 import PostFilter from '../../components/posts/PostFilter.vue';
+import PostModal from '../../components/posts/PostModal.vue';
 
 const router = useRouter()
 const posts = ref([])
@@ -109,6 +120,18 @@ const goPage = (id) => {
     },
     hash: '#world'
   })
+}
+
+// modal
+const show = ref(false)
+const modalPost = reactive({})
+
+const openModal = ({ title = '', contents = '', createdAt = '' }) => {
+  show.value = true
+
+  modalPost.title = title
+  modalPost.contents = contents
+  modalPost.createdAt = createdAt
 }
 </script>
 

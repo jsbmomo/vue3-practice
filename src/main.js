@@ -5,6 +5,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router';
 
+
 createApp(App).use(router).mount('#app')
 
 // vite 공식 문서 참고 https://ko.vite.dev/guide/env-and-mode.html

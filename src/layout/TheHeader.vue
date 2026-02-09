@@ -22,6 +22,9 @@
             <li class="nav-item">
               <RouterLink class="nav-link" active-class="active" to="/nested">Nested</RouterLink>
             </li>
+            <li class="nav-item">
+              <RouterLink class="nav-link" active-class="active" to="/tui-grid">tui-grid</RouterLink>
+            </li>
           </ul>
           
           <div class="d-flex">
