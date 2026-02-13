@@ -4,9 +4,18 @@ import 'bootstrap/dist/js/bootstrap.js'
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from '@/router';
+import objPlugins from './plugins/obj';
+import funcPlugin from './plugins/func';
+import person from './plugins/person'
+
+const app = createApp(App)
+app.use(funcPlugin)
+app.use(objPlugins, { name: 'Test Plugin'})
+app.use(person, { name: 'Beom'} )
+app.use(router)
+app.mount('#app')
 
 
-createApp(App).use(router).mount('#app')
 
 // vite 공식 문서 참고 https://ko.vite.dev/guide/env-and-mode.html
 // console.log('MODE: ', import.meta.env.MODE); // development

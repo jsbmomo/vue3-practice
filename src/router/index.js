@@ -10,6 +10,7 @@ import NestedView from '../views/nested/NestedView.vue'
 import NestedOneView from '../views/nested/NestedOneView.vue'
 import NestedTwoView from '../views/nested/NestedTwoView.vue'
 import NestedHomeView from '../views/nested/NestedHomeView.vue'
+import TuiGridView from '../views/TuiGridView.vue'
 
 const routes = [
   {
@@ -70,6 +71,11 @@ const routes = [
     name: 'NotFound', 
     component: NotFoundView 
   },
+  {
+    path: '/tui-grid',
+    name: 'TuiGrid',
+    component: TuiGridView
+  }
 ]
 
 const router = createRouter({
